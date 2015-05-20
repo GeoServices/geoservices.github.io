@@ -1,0 +1,128 @@
+---
+layout: default
+---
+
+<div class="container">
+
+  <div class="row">
+    <div class="col-lg-12">
+      <h2>GeoServices</h2>
+
+      <p>GeoServices is a REST-based application programming interface that provides developers consistent and complete access to structured data. </p>
+
+      <p>Using the API, developers can query data using a SQL-like where clause, geospatial and time filters, perform aggregations, sorting, text search, and spatial projection.</p>
+
+      <p>Originally <a href="http://www.esri.com/industries/landing-pages/geoservices/geoservices">developed by Esri</a>, <a href="http://blogs.esri.com/esri/arcgis/2010/09/07/the-geoservices-rest-specification-an-open-standard-for-gis-web-services/">in 2010</a> the specification was transferred to the <a href="http://www.openwebfoundation.org/faqs/users-of-owf-agreements">Open Web Foundation</a>. 
+      </p>
+      <p>To learn even more about all of the capabilities of GeoServices, read the <a href="http://resources.arcgis.com/en/help/arcgis-rest-api/index.html#/Working_with_services_you_ve_published/02r3000000tq000000/">full API documentation</a>.
+      </p>
+
+      <h3>In a Nutshell</h3>
+
+      <p>If you want to know just one thing about GeoServices - you can query for data using a location or attribute filters.
+      </p>
+      <p>Look up which U.S. county is at a specific latitude and longitude:
+      </p>
+      <pre>http://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/Places_CouSub_ConCity_SubMCD/MapServer/15/query
+        ?outFields=*
+        &amp;geometryType=esriGeometryPoint
+        &amp;geometry=-77.06930,38.89733
+        &amp;inSR=4326
+        &amp;f=json</pre>
+
+        <p>Returns JSON with an array of <code>features</code>. The output is truncated below:
+        </p>
+
+<pre>
+{
+  "displayFieldName": "BASENAME",
+  "features": [{
+    "attributes": {
+      "AREALAND": 67318078,
+      "AREAWATER": 244125,
+      "BASENAME": "Arlington",
+      "CENTLAT": "+38.8786295",
+      "CENTLON": "-077.1009869",
+      "COUNTY": "013",
+      "COUSUB": "90072",
+      "COUSUBCC": "Z7",
+      "COUSUBNS": "01480097",
+      "FUNCSTAT": "F",
+      "GEOID": "5101390072",
+      "INTPTLAT": "+38.8783374",
+      "INTPTLON": "-077.1007034",
+      "LSADC": "00",
+      "MTFCC": "G4040",
+      "NAME": "Arlington",
+      "OBJECTID": 14937,
+      "OID": 27653241101602,
+      "STATE": "51"
+    },
+    "geometry": { ... }
+  }],
+  "fields": [ ... ],
+  ...
+}</pre>
+
+
+          <p>Or you can search for DC Public Schools that are Elementary and have between 200 and 1000 students within a map extent: 
+          </p>
+<pre>
+http://maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/Education_WebMercator/MapServer/5/query
+  ?where=FACUSE like '%Elementary%' AND TOTAL_STUD >= 200 AND TOTAL_STUD <= 1000
+  &amp;geometry={"xmin":-77.0036,"ymin":38.8879,"xmax":-76.98434,"ymax":38.90007,"spatialReference":{"wkid":4326}}
+  &amp;geometryType=esriGeometryEnvelope
+  &amp;inSR=4326
+  &amp;outFields=*
+</pre>
+
+          <p>These two examples are probably the most common use cases for using the GeoServices API. Read on for more details on advanced features.</p>
+
+          <h3>Resources</h3>
+
+          <p>It's useful to understand the common terminology and resources that compose the GeoServices API. 
+          </p>
+          <dl>
+            <dt>Server</dt> 
+            <dd>a web server that connects a database and provides many services.</dd>
+            <dt>Folder</dt> 
+            <dd>a collection of Services organized by a topic.</dd>
+
+            <dt>Service</dt> a high-level container of many layers, _e.g. Education_. A Service is often a thematic grouping of ldters. Examples include `FeatureServer`, `MapServer`, `ImageServer`</dd>
+
+            <dt>Layer</dt>
+            <dd>a collection of data that have a common schema, _e.g. Public Schools in DC_. Layers are addressed as their index, starting at 0. A Layer has many features. <em>aka Dataset</em></dd>
+
+            <dt>Feature</dt> 
+            <dd>an individual location, <em>e.g. a School</em>. A Feature has a geometry and many attributes.</dd>
+
+            <dt>Attribute</dt> 
+            <dd>an aspect of a feature, <em>e.g. Number of Students</em>. An attribute can be a string, number, timestamp, id, or blob. </dd>
+          </dl>
+
+          <h3>URI structure</h3>
+
+          <p>The GeoServices REST API follows a common structure. 
+          </p>
+          <code>http://{host}/{site}/rest/services/{folder}/{serviceName}/{serviceType}/{layerIndex}</code>
+
+          <p>For example the layer "DC Public Schools" has the URI address of: http://maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/Education_WebMercator/MapServer/5
+          </p>
+
+          <h3>Formats</h3>
+
+          <p>GeoServices support a few common formats. Most commonly these are `HTML` and `JSON`. Format outputs are requested by using the URI parameter. `HTML` is the default response
+          </p>
+          <code>.../Education_WebMercator/MapServer/5?f=json</code>
+
+          <h3>Filtering by Attributes</h3>
+
+          <h3>Location Filter</h3>
+
+          <h3>Aggregation Statistics</h3>
+        </div>
+
+      </div>
+    </div>
+
+
