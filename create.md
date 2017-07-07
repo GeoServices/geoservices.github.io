@@ -253,3 +253,28 @@ For more details, see the [Add to Definition API Documentation](http://resources
 
 
 </div>
+
+
+## SQL types
+
+sqlType is needed in feature service to bind to the actual field in the dbase during query or even editing.
+
+SqlType also allows the client to control how the column is created in the database.
+
+
+| SqlType | FieldType | Result database column type | Notes |
+| ------- | --------- | ------ | ------- |
+| Not relevant | esriFieldTypeBlob | Column size determine the varbinary size created. Default is max.  [varbinary]|
+| Not relevant | esriFieldTypeDate |  [datetime2] – default [smalldatetime] – column size = 4  [datetimeoffset] – column size = 10 |
+| Not relevant | esriFieldTypeDouble | [float] | |
+| Not relevant | esriFieldTypeSingle | [real]  | |
+| Not relevant | esriFieldTypeOID | [int] | |
+| Not relevant | esriFieldTypeGlobalId esriFieldTypeGUID | [uniqueidentifier] | |
+| sqlTypeBigInt | esriFieldTypeInteger | [bigint] | |
+| sqlTypeInteger | esriFieldTypeInteger | [int] | |
+| sqlTypeBit | esriFieldTypeSmallInteger | [bit] | |
+| sqlTypeTinyInt | esriFieldTypeSmallInteger | [tinyint] | |
+| sqlTypeInteger | esriFieldTypeSmallInteger | [smallint] | |
+| Not relevant | esriFieldTypeString | [nvarchar] | Column size determines the max nvarchar.  Default is [nvarchar] (max) |
+| sqlTypeTime | esriFieldTypeString | [time] | |
+| sqlTypeTimestamp | esriFieldTypeString | [timestamp2] | |
