@@ -15,6 +15,18 @@ Geoservices are composed of two important aspects: Services and Layers.
 
 By analogy, a Service is like a database and a Layer is like a Table. A Service will have one or many Layers. A Layer has many Features, which are like Rows.
 
+## Authentication
+
+An access token is required for creating a service.
+
+`POST https://www.arcgis.com/sharing/rest/tokens/generateToken`
+
+- `f=json`
+- `username={username}`
+- `password={password}`
+- `expiration={time in minutes}`
+
+
 ## Creating a Service
 
 To create a Layer, you will first need to create a Service, and then you can add Layers.
@@ -51,7 +63,9 @@ A Layer requires a schema, defined as `fields`.
 
 To create a layer, you need to call `addToDefinition` in the the `rest/admin/services` for your Service.
 
-`POST http://services.arcgis.com/bkrWlSKcjUDFDtgw/arcgis/rest/admin/services/{ServiceName}/FeatureServer/addToDefinition`
+`POST {serviceurl}/addToDefinition`
+
+The `serviceurl` was returned in the API `createService`. You can also build the URL: `POST https://services.arcgis.com/{orgId}/arcgis/rest/admin/services/{ServiceName}/FeatureServer/addToDefinition`
 
 - `addToDefinition=...` _see Layer definition below_
 - `async=true`
