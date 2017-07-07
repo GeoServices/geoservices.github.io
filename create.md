@@ -112,8 +112,28 @@ An example Field JSON:
   "domain": null,
   "defaultValue": null,
   "type": "esriFieldTypeDouble",
-  "sqlType": "sqlTypeNVarchar",
+  "sqlType": "sqlTypeDecimal",
   "length": 256
+},{
+  "name": "ExampleIField",
+  "alias": "An Example Integer Field",
+  "type": "esriFieldTypeInteger",
+  "actualType": "int",
+  "sqlType": "sqlTypeInteger",
+  "nullable": true,
+  "editable": true,
+  "domain": null,
+  "defaultValue": null
+},{
+  "name": "ExampleDateField",
+  "alias": "An Example Date Field",
+  "type": "esriFieldTypeDate",
+  "sqlType": "sqlTypeOther",
+  "length": 8,
+  "nullable": true,
+  "editable": false,
+  "domain": null,
+  "defaultValue": null
 }]
 </pre>
 
